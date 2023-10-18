@@ -19,7 +19,7 @@ public class BasicCalculator : ILeetCodeProblem
         Console.WriteLine($"{s} = {Calculate(s)}");
     }
 
-    public bool Solved => false;
+    public bool Solved => true;
     
     private  int Calculate(string s)
     {
