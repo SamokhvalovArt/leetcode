@@ -8,25 +8,35 @@ public class ContainerWithMostWater : ILeetCodeProblem
     
     public void Run()
     {
-        var height = new[] { 7, 8, 6, 2, 5, 4, 8, 3, 7 };
+        var height = new[] { 1, 1 };
 
         Console.WriteLine($"Height => {string.Join(", ", height)}");
         Console.WriteLine($"MaxArea = {MaxArea(height)}");
     }
 
-    public bool Solved => false;
+    public bool Solved => true;
     
     private static int MaxArea(int[] height)
     {
-        int CalculateXAxis(int fromIndex, int toIndex)
-        {
-            var rightHeight = height[fromIndex];
-            var leftHeight = height[toIndex];
-
-            return (toIndex - fromIndex) * (rightHeight > leftHeight ? rightHeight : leftHeight); 
-        }
-        
+        var result = 0;
         var backIndex = height.Length - 1;
-        return CalculateXAxis(0, backIndex);
+        for (var i = 0; i < backIndex;)
+        {
+            var rightHeight = height[backIndex];
+            var leftHeight = height[i];
+            
+            var tmpValue = (backIndex - i) * Math.Min(rightHeight, leftHeight);
+            result = tmpValue > result ? tmpValue : result;
+
+            if (rightHeight < leftHeight)
+            {
+                backIndex--;
+                continue;
+            }
+
+            i++;
+        }
+
+        return result;
     }
 }
