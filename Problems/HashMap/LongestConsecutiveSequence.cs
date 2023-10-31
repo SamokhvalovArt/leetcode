@@ -1,41 +1,65 @@
-﻿namespace Samokhvalov.LeetCode.Problems.HashMap;
+using System.Globalization;
+
+namespace Samokhvalov.LeetCode.Problems.HashMap;
 
 /// <summary>
-/// Input: nums = [100,4,200,1,3,2]
-/// Output: 4
-/// Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+/// [5, 6, 1, 0, 2, 4, 3, 56, 50, 51, 52, 52]
+/// 7 (0, 1, 2, 3, 4, 5, 6)
 /// </summary>
 public class LongestConsecutiveSequence : ILeetCodeProblem
 {
-    public string ProblemUrl => "https://leetcode.com/problems/longest-consecutive-sequence";
-
-    public ProblemLevel Level => ProblemLevel.Medium;
+    public string ProblemUrl { get; }
+    public ProblemLevel Level { get; }
+    
     public void Run()
     {
-        var nums = new[] { 1,5,0,3,2,4 };
+        var list = new List<int>();
+        for (var i = 100000; i > 0; i--)
+        {
+            list.Add(i);
+        }
+
+        var numbers = new[] { 5, 6, 1, 0, 2, 4, 3, 56, 50, 51, 52, 52 };
         
-        Console.WriteLine($"Nums => {nums.ToStringCollection()}");
-        Console.WriteLine($"LongestConsecutive => {LongestConsecutive(nums)}");
+        Console.WriteLine($"Numbers => {string.Join(", ", numbers)}");
+        Console.WriteLine($"Result => {DoImpl1(numbers)}");
     }
 
-    public bool Solved => false;
-    
-    private static int LongestConsecutive(int[] nums)
+    public bool Solved => true;
+
+    private static int DoImpl1(int[] nums)
     {
-        var elements = new Dictionary<int, int>();
-        var longestConsecutive = 1;
-        foreach (var num in nums)
+        if (nums.Length == 0)
         {
-            if (elements.ContainsKey(num))
+            return 0;
+        }
+        
+        System.Array.Sort(nums);
+
+        var result = 1;
+        var tmpResult = 1;
+        for (var i = 1; i < nums.Length; i++)
+        {
+            if (nums[i - 1] == nums[i])
             {
+                continue;
+            }    
+            
+            if (nums[i - 1] + 1 == nums[i])
+            {
+                tmpResult++;
+                result = tmpResult > result ? tmpResult : result;
                 continue;
             }
 
-            
-
-            // longestConsecutive = numConsecutive > longestConsecutive ? numConsecutive : longestConsecutive;
+            tmpResult = 1;
         }
+        return result;
+    }
+
+    private static int DoImpl2(int[] numbers)
+    {
         
-        return longestConsecutive;
+        return -1;
     }
 }
