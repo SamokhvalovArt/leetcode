@@ -75,5 +75,5 @@ public class FourSum : ILeetCodeProblem
         return results;
     }
     
-    public bool Solved => false;
+    public bool Solved => true;
 }
