@@ -123,5 +123,5 @@ public class LongestSubstringWithoutRepeatingCharacters : ILeetCodeProblem
     }
     
     
-    public bool Solved => false;
+    public bool Solved => true;
 }
