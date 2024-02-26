@@ -6,4 +6,9 @@ public static class Extensions
     {
         return string.Join(", ", array);
     }
+    
+    public static string ToStringCollectionMatrix<T>(this IEnumerable<IEnumerable<T>> array)
+    {
+        return string.Join("| ", array.Select(x => $"[{x.First()}, {x.Last()}]"));
+    }
 }
